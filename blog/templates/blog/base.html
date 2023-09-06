@@ -25,135 +25,17 @@
             <div id="kheader">
                 {% block kheader %}
                     <header class="w3-container w3-center w3-padding-32"> 
-                        <h1 class="w3-jumbo" style="text-shadow:3px 3px 0 #6699CC" style="color:#0055aa"><b>Karmacanix Music</b></h1>
-                        <h5>filter by: 
-                            {% for tag in tag_list %}
-                                <a href="{% url 'article_tag' tag.id %}"><span class="w3-tag w3-dark-gray w3-margin-bottom w3-hover-purple w3-round">{{ tag.name }}</span></a>
-                            {% endfor %}
-                        </h5>
+                        <h1 class="w3-jumbo" style="text-shadow:3px 3px 0 #6699CC" style="color:#0055aa">
+                            <b>Karmacanix Music</b></h1>
                     </header>
                 {% endblock %}
             </div>
-            <!-- Grid -->
             <div class="w3-row">
-                <!-- Blog entries -->
+            <!-- Blog entries -->
                 <div id="content">
                     {% block content %}{% endblock %}
                 </div>
-                <!-- END BLOG ENTRIES -->
-
-                <!-- Introduction menu -->
-                <div class="w3-col l4">
-                    <!-- About Card -->
-                    <div class="w3-container w3-margin w3-margin-top w3-center w3-padding-16">
-                        <img src="{% static '/images/android-chrome-512x512.png' %}" style="width:30%">
-                        <div class="w3-container w3-padding-16">
-                            <h4><b>Karmacanix</b></h4>
-                            <p>Music from Wellington, New Zealand</p>
-                            <!-- need twitter icon and soundcloud icon -->
-                            <a href="https://twitter.com/karmacanix75"><i class="fa-brands fa-twitter fa-2xl" style="color:#00acee"></i></a> <a href="https://soundcloud.com/karmacanix"><i class="fa-brands fa-soundcloud fa-2xl" style="color:#F26F23"></i></a>
-                        </div>
-                    </div>
-                    <hr>
-
-                    <!-- Posts -->
-                    <!-- get all articles when spolight = true, 
-                    limit to first 4 spolights, 
-                    if lesss then 4 then use first 4 from articles without filtering for spotlight
-                    display title and short_desc
-                    add url to single blog page (when single blog page feature is implemented)
-                    -->
-                    <div class="w3-card w3-margin">
-                        <div class="w3-container w3-padding w3-blue-grey">
-                            <h4>Popular Posts</h4>
-                        </div>
-                        <ul class="w3-ul w3-hoverable">
-                            <!-- spotlight article  -->
-                            {% for article in spotlight_article_list %}
-                                {% if forloop.counter == 1 %}
-                                    <li class="w3-padding-16" style="background-color:#54363c">
-                                        <div class="w3-row">
-                                            <img src="{% static 'images/dial1.png' %}" alt="Image" class="w3-third w3-left w3-margin-right" style="width:50px">
-                                            <span class="w3-twothird">
-                                                <a href="{% url 'article' article.id %}">
-                                                    <span class="w3-large w3-text-white">{{ article.title }}</span><br>
-                                                    <span class="w3-text-white"><i>{{ article.short_desc }}</i></span>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </li>
-                                {% endif %}
-                                {% if forloop.counter == 2 %}
-                                    <li class="w3-padding-16" style="background-color:#66424a">
-                                        <div class="w3-row">
-                                            <img src="{% static 'images/dial2.png' %}" alt="Image" class="w3-third w3-left w3-margin-right" style="width:50px">
-                                            <span class="w3-twothird">
-                                                <a href="{% url 'article' article.id %}">
-                                                    <span class="w3-large w3-text-white">{{ article.title }}</span><br>
-                                                    <span class="w3-text-white"><i>{{ article.short_desc }}</i></span>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </li> 
-                                {% endif %}
-                                {% if forloop.counter == 3 %}
-                                    <li class="w3-padding-16" style="background-color:#513139">
-                                        <div class="w3-row">
-                                            <img src="{% static 'images/dial3.png' %}" alt="Image" class="w3-third w3-left w3-margin-right" style="width:50px">
-                                            <span class="w3-twothird">
-                                                <a href="{% url 'article' article.id %}">
-                                                    <span class="w3-large w3-text-white">{{ article.title }}</span><br>
-                                                    <span class="w3-text-white"><i>{{ article.short_desc }}</i></span>
-                                                </a>
-                                            </span>
-                                            </div>
-                                    </li>   
-                                {% endif %}
-                                {% if forloop.counter == 4 %}
-                                    <li class="w3-padding-16 w3-hide-medium w3-hide-small" style="background-color:#69414a">
-                                        <div class="w3-row">
-                                            <img src="{% static 'images/dial4.png' %}" alt="Image" class="w3-third w3-left w3-margin-right" style="width:50px">
-                                            <span class="w3-twothird">
-                                                <a href="{% url 'article' article.id %}">
-                                                    <span class="w3-large w3-text-white">{{ article.title }}</span><br>
-                                                    <span class="w3-text-white"><i>{{ article.short_desc }}</i></span>
-                                                </a>
-                                            </span>
-                                        </div>
-                                    </li>  
-                                {% endif %}
-                            {% endfor %}
-                            <!-- END spotlight article -->
-                        </ul>
-                    </div>
-                    <hr> 
-
-                    <!-- Labels / tags -->
-                    <div class="w3-card w3-margin w3-blue-grey">
-                        <div class="w3-container w3-padding">
-                            <h4>Tags</h4>
-                        </div>
-                        <div class="w3-container w3-blue-grey">
-                            <h5>filter by: 
-                                {% for tag in tag_list %}
-                                    <a href="{% url 'article_tag' tag.id %}"><span class="w3-tag w3-dark-gray w3-margin-bottom w3-hover-purple w3-round">{{ tag.name }}</span></a>
-                                {% endfor %}
-                            </h5>
-                        </div>
-                    </div>
-                <!-- END Introduction Menu -->
-                </div>
-
-            <!-- END GRID -->
-            </div><br>
-
-        <!-- END w3-content -->
+            </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-            <p class="w3-center">Powered by Karmalade<sup><i class="fa-regular fa-copyright fa-2xs"></i></sup> 2023</p>
-        </footer>
-
     </body>
 </html>
