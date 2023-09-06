@@ -1,0 +1,54 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block title %}Karamcanix Music - Home{% endblock %}
+
+{% block content %}
+<div class="w3-col l8 s12">
+    {% for article in page_obj %}
+    <!-- Blog entry -->
+    <div class="w3-card-4 w3-margin w3-blue-grey">
+        {% if forloop.counter|divisibleby:"2" %}
+        <img src="{% static 'images/tracking2.png' %}" alt="Playlist" style="width:100%">
+        {% else %}
+        <img src="{% static 'images/tracking1.png' %}" alt="Mixer" style="width:100%">
+        {% endif %}
+        <div class="w3-container">
+            <h2><b>{{ article.title|upper }}</b></h2>
+            <h5>{{ article.short_desc }}, <span class="w3-opacity">released {{ article.pub_date|date:"jS M Y" }}.</h5>
+            <p><a href="{% url 'article' article.id %}" class="w3-button w3-padding-large w3-white w3-border"><b>TELL ME MORE »</b></a></p>
+        </div>
+    </div>
+    <hr>
+    <!-- Blog entry end-->
+    {% endfor %}
+    <!-- pagination navigation-->
+    <div class="w3-container w3-margin">
+        <div class="w3-row w3-center">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1"><button class="w3-button w3-black w3-padding-large w3-margin-bottom">&laquo; First</button></a>
+                        <a href="?page={{ page_obj.previous_page_number }}"><button class="w3-button w3-black w3-padding-large w3-margin-bottom">Previous</button></a>
+                    {% else %}
+                        <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">&laquo; First</button>
+                        <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
+                    {% endif %}
+                    <span class="current">
+                        <button class="w3-button w3-light-grey w3-hover-light-grey w3-padding-large w3-margin-bottom">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</button>
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}"><button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next</button></a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}"><button class="w3-button w3-black w3-padding-large w3-margin-bottom">Last &raquo;</button></a>
+                    {% else %}
+                        <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Next</button>
+                        <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Last &raquo;</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- END pagination navigation END-->
+</div>
+{% endblock %}
