@@ -22,4 +22,4 @@ class Article(models.Model):
     spotlight_objects = SpotlightArticleManager()
     
     def __str__(self):
-        return f"{self.media_name} {self.title}"
+        return f"{self.media_name}"
